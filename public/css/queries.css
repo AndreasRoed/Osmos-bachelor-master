@@ -1,0 +1,218 @@
+/***********************
+    DESKTOP
+***********************/
+@media only screen and (max-width: 1200px) {
+
+}
+
+
+/*****************************
+    Medium Devices, Desktops
+*****************************/
+@media only screen and (max-width : 1024px) {
+    body {
+        font-size: 16px;
+    }
+}
+
+
+@media screen and (max-width: 992px) {
+    .bg-textbox {
+        top: 49%;
+    }
+
+    #osmos-logo-main {
+        width: 32%;
+    }
+
+    .main-buttons {
+        left: 5%;
+        right: 5%;
+        width: 40%;
+    }
+
+    .main-buttons i {
+        font-size: 200%;
+    }
+
+    .main-buttons h3 {
+        font-size: 80%;
+    }
+
+    .main-buttons h4 {
+        font-size: 90%;
+    }
+
+    .main-buttons p {
+        font-size: 70%;
+    }
+
+    .profile-date-picker .md-datepicker-input-container {
+        width: 85%;
+        margin: 0;
+    }
+
+    .profile-date-picker p {
+        padding-left: 53px;
+        margin: 0;
+        left: 36px;
+        right: auto;
+        color: #777;
+        font-size: 11px;
+        font-weight: 700;
+    }
+}
+
+
+/**************************
+    Small Devices, Tablets
+**************************/
+@media only screen and (max-width: 768px) {
+    .container {
+        padding: 10px 0 10px 0;
+    }
+
+    .table-box {
+        box-shadow: none;
+    }
+
+    .browse-content-main {
+        box-shadow: none;
+    }
+
+    .bg-textbox {
+        top: 49%;
+    }
+
+    #osmos-logo-main {
+        width: 30%;
+    }
+
+    .main-buttons {
+        left: 5%;
+        right: 5%;
+        width: 40%;
+    }
+
+    .main-buttons i {
+        font-size: 170%;
+    }
+
+    .main-buttons h3 {
+        font-size: 80%;
+    }
+
+    .main-buttons h4 {
+        font-size: 90%;
+    }
+
+    .main-buttons p {
+        font-size: 70%;
+    }
+}
+
+
+@media screen and (max-width: 620px) {
+    .bg-textbox {
+        top: 48%;
+    }
+
+    #osmos-logo-main {
+        width: 30%;
+    }
+
+    .main-buttons {
+        left: 10%;
+        right: 10%;
+        width: 30%;
+    }
+
+    .main-buttons i {
+        font-size: 130%;
+    }
+
+    .main-buttons h3 {
+        font-size: 75%;
+    }
+
+    .main-buttons h4 {
+        font-size: 80%;
+    }
+
+    .main-buttons p {
+        font-size: 60%;
+    }
+
+    .profile-date-picker .md-datepicker-input-container {
+        width: 80%;
+    }
+}
+
+
+/***********************
+    Extra Small Devices, Phones
+***********************/
+@media only screen and (max-width: 480px) {
+    .profile-date-picker .md-datepicker-input-container {
+        width: 75%;
+    }
+}
+
+
+@media screen and (max-width: 404px) {
+    .box-header-users {
+        height: 60px;
+    }
+}
+
+
+@media screen and (max-width: 380px) {
+    .bg-textbox {
+        top: 45%;
+    }
+
+    #osmos-logo-main {
+        margin: 0;
+        padding: 0;
+        width: 10%;
+    }
+
+    .main-buttons {
+        width: 295px;
+        left: 12%;
+    }
+
+    .main-buttons i {
+        font-size: 100%;
+    }
+
+    .main-buttons h3 {
+        font-size: 60%;
+    }
+
+    .main-buttons h4 {
+        font-size: 70%;
+    }
+
+    .main-buttons p {
+        font-size: 50%;
+    }
+
+    .profile-date-picker .md-datepicker-input-container {
+        width: 70%;
+    }
+}
+
+
+/**************************
+    Custom, iPhone Retina
+**************************/
+@media only screen and (max-width : 320px) {
+    .container {
+        padding: 10px 0 10px 0;
+    }
+
+    .table-box {
+        box-shadow: none;
+    }
+}

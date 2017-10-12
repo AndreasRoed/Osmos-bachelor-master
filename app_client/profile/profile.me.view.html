@@ -1,0 +1,221 @@
+<navigation></navigation>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="table-box table-box-profile">
+                <div class="table-box-header">
+                    <h2><!-- <i class="fa fa-align-justify" ng-click="showProfile = !showProfile" title="show/hide"></i> --><span class="break"></span>My Profile</h2>
+                </div>
+                <div class="table-box-content">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <form ng-submit="vm.openSaveAccountModal()" name="profileform" novalidate>
+                                <md-content class="md-no-momentum" layout-padding>
+                                    <div class="col-md-3">
+                                        <h2 ng-show="vm.user.academic && !vm.user.industrial">{{vm.user.firstname + " " + vm.user.lastname}}</h2>
+                                        <h2 ng-show="vm.user.industrial && !vm.user.academic">{{vm.user.companyname}}</h2>
+                                        <h2 ng-show="vm.user.academic && vm.user.industrial">{{vm.user.firstname + " " + vm.user.lastname}}</h2>
+                                        <div class="profile-image-blend">
+                                            <a href="" type="file" ngf-select="vm.uploadProfilePicture($file)" accept="image/*" ngf-resize="{width: 200, height: 200, quality: 0.8, centerCrop: true}">
+                                                <img class="img-rounded profile-image" title="Update Profile Picture" ng-src="{{ vm.user.imageURL }}" alt="Profile Image">
+                                            </a>
+                                        </div>
+                                        <br />
+                                        <div class="text-center">
+                                            <md-button type="submit" class="md-raised md-primary" ng-disabled="profileform.$invalid || !profileform.$dirty">Save changes</md-button>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 profile-edit">
+                                        <md-input-container class="md-icon-float md-block" ng-show="vm.user.academic">
+                                            <label>First name</label>
+                                            <md-icon md-svg-src="../icons/ic_person_black_24px.svg"></md-icon>
+                                            <input name="firstname" ng-model="vm.user.firstname" type="text"
+                                                   md-maxlength="50" ng-required="vm.user.academic">
+                                            <div ng-messages="profileform.firstname.$error">
+                                                <div ng-message="required">This is required!</div>
+                                                <div ng-message="md-maxlength">That's too long!</div>
+                                            </div>
+                                        </md-input-container>
+                                        <md-input-container class="md-icon-float md-block" ng-show="vm.user.academic">
+                                            <label>Last name</label>
+                                            <md-icon md-svg-src="../icons/ic_group_black_24px.svg"></md-icon>
+                                            <input name="lastname" ng-model="vm.user.lastname" type="text"
+                                                   md-maxlength="50" ng-required="vm.user.academic">
+                                            <div ng-messages="profileform.lastname.$error">
+                                                <div ng-message="required">This is required!</div>
+                                                <div ng-message="md-maxlength">That's too long!</div>
+                                            </div>
+                                        </md-input-container>
+                                        <md-input-container class="md-icon-float md-block" ng-show="vm.user.industrial">
+                                            <label>Company name</label>
+                                            <md-icon md-svg-src="../icons/ic_work_black_24px.svg"></md-icon>
+                                            <input name="companyname" ng-model="vm.user.companyname" type="text"
+                                                   md-maxlength="50" ng-required="vm.user.industrial">
+                                            <div ng-messages="profileform.companyname.$error">
+                                                <div ng-message="required">This is required!</div>
+                                                <div ng-message="md-maxlength">That's too long!</div>
+                                            </div>
+                                        </md-input-container>
+                                        <md-input-container class="md-icon-float md-block">
+                                            <label>E-mail</label>
+                                            <md-icon md-svg-src="../icons/ic_email_black_24px.svg"></md-icon>
+                                            <input class="input-disabled" name="email" ng-model="vm.user.email" type="email"
+                                                   ng-pattern="/^.+@.+\..+$/" ng-disabled="true">
+                                        </md-input-container>
+                                        <md-input-container class="md-icon-float md-block">
+                                            <label>About</label>
+                                            <md-icon md-svg-src="../icons/ic_info_black_24px.svg"></md-icon>
+                                            <textarea name="about" ng-model="vm.user.about" type="text" md-maxlength="200"></textarea>
+                                            <div ng-messages="profileform.about.$error">
+                                                <div ng-message="md-maxlength">That's too long!</div>
+                                            </div>
+                                        </md-input-container>
+                                        <md-input-container class="md-icon-float md-block col-md-6" ng-show="vm.user.academic">
+                                            <label>Gender</label>
+                                            <md-icon md-svg-src="../icons/ic_perm_identity_black_24px.svg"></md-icon>
+                                            <md-select ng-model="vm.user.gender" placeholder="Select gender">
+                                                <md-option ng-repeat="g in vm.genders" value="{{g}}">
+                                                    {{g}}
+                                                </md-option>
+                                            </md-select>
+                                        </md-input-container>
+                                        <div class="profile-date-picker col-md-5" ng-show="vm.user.academic">
+                                            <p>Date born</p>
+                                            <md-datepicker name="dateBorn" ng-model="vm.user.born" md-placeholder="Enter date">
+                                            </md-datepicker>
+                                            <div class="profile-date-validation-messages" ng-messages="profileform.dateBorn.$error">
+                                                <div ng-message="valid">The entered value is not a valid date!
+                                                    <br />Valid format is: (mm/dd/yyyy)</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-offset-1 col-md-4 profile-edit">
+                                        <md-input-container class="md-icon-float md-block">
+                                            <label>Phone number</label>
+                                            <md-icon md-svg-src="../icons/ic_phone_black_24px.svg"></md-icon>
+                                            <input name="phone" ng-model="vm.user.phone"
+                                                   ng-pattern="/^[0-9]{5,15}$/">
+                                            <div ng-messages="profileform.phone.$error">
+                                                <div ng-message="pattern">
+                                                    Phone number must be all numbers, <br />and between 5 and 15 characters long.
+                                                </div>
+                                            </div>
+                                        </md-input-container>
+                                        <md-input-container class="md-icon-float md-block">
+                                            <label>Address</label>
+                                            <md-icon md-svg-src="../icons/ic_home_black_24px.svg"></md-icon>
+                                            <input name="address" ng-model="vm.user.address" type="text"
+                                                   md-maxlength="50">
+                                            <div ng-messages="profileform.address.$error">
+                                                <div ng-message="md-maxlength">That's too long!</div>
+                                            </div>
+                                        </md-input-container>
+                                        <md-input-container class="md-icon-float md-block">
+                                            <label>Postal Code</label>
+                                            <md-icon md-svg-src="../icons/ic_place_black_24px.svg"></md-icon>
+                                            <input name="zipcode" ng-model="vm.user.zipcode"
+                                                   ng-pattern="/^[0-9]{3,10}$/">
+                                            <div ng-messages="profileform.zipcode.$error">
+                                                <div ng-message="pattern">
+                                                    Postal code must be all numbers, <br />and between 3 and 10 characters long.
+                                                </div>
+                                            </div>
+                                        </md-input-container>
+                                        <md-input-container class="md-icon-float md-block">
+                                            <label>City</label>
+                                            <md-icon md-svg-src="../icons/ic_location_city_black_24px.svg"></md-icon>
+                                            <input name="city" ng-model="vm.user.city" type="text" md-maxlength="35">
+                                            <div ng-messages="profileform.city.$error">
+                                                <div ng-message="md-maxlength">That's too long!</div>
+                                            </div>
+                                        </md-input-container>
+                                        <md-input-container class="md-icon-float md-block">
+                                            <label>Country</label>
+                                            <md-icon md-svg-src="../icons/ic_terrain_black_24px.svg"></md-icon>
+                                            <md-select ng-model="vm.user.country" placeholder="Select country">
+                                                <md-option ng-repeat="c in vm.countries" value="{{c.code}}">
+                                                    {{c.name}}
+                                                </md-option>
+                                            </md-select>
+                                        </md-input-container>
+                                        <br />
+                                        <md-input-container class="md-icon-float md-block" ng-show="vm.user.academic">
+                                            <label>Employer</label>
+                                            <md-icon md-svg-src="../icons/ic_free_breakfast_black_24px.svg"></md-icon>
+                                            <input name="employer" ng-model="vm.user.job_place" type="text" md-maxlength="35">
+                                            <div ng-messages="profileform.employer.$error">
+                                                <div ng-message="md-maxlength">That's too long!</div>
+                                            </div>
+                                        </md-input-container>
+                                        <md-input-container class="md-icon-float md-block" ng-show="vm.user.academic">
+                                            <label>Title</label>
+                                            <md-icon md-svg-src="../icons/ic_face_black_24px.svg"></md-icon>
+                                            <input name="title" ng-model="vm.user.job_title" type="text" md-maxlength="35">
+                                            <div ng-messages="profileform.title.$error">
+                                                <div ng-message="md-maxlength">That's too long!</div>
+                                            </div>
+                                        </md-input-container>
+                                    </div>
+                                </md-content>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="table-box col-md-12 table-box-profile">
+                <div class="table-box-header">
+                    <h2><span class="break"></span>Change Password</h2>
+                </div>
+                <div class="table-box-content col-md-10 col-md-offset-1">
+                    <form ng-submit="vm.openPassChangeAccountModal()" name="passwordform" novalidate>
+                        <md-content class="md-no-momentum" layout-padding>
+                            <md-input-container class="md-icon-float md-block" ng-show="vm.user.pwdSalt">
+                                <label>Old password</label>
+                                <md-icon md-svg-src="../icons/ic_lock_open_black_24px.svg"></md-icon>
+                                <input name="oldPassword" type="password" ng-model="vm.password.oldPassword"
+                                       ng-disabled="passwordform.password.$invalid" ng-required="vm.user.pwdSalt">
+                                <div ng-messages="passwordform.oldPassword.$error">
+                                    <div ng-message="required">This is required!</div>
+                                </div>
+                            </md-input-container>
+                            <md-input-container class="md-icon-float md-block">
+                                <label>New password</label>
+                                <md-icon md-svg-src="../icons/ic_lock_black_24px.svg"></md-icon>
+                                <input name="newpassword" type="password" ng-model="vm.password.newPassword"
+                                       ng-pattern="/(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z])/" minlength="8" ng-required="true">
+                                <div ng-messages="passwordform.newpassword.$error">
+                                    <div ng-message="required">This is required!</div>
+                                    <div ng-show="passwordform.newpassword.$error.minlength && !passwordform.newpassword.$error.required">
+                                        Must contain at least 8 characters.
+                                    </div>
+                                    <div ng-show="!passwordform.newpassword.$error.required && passwordform.newpassword.$error.pattern">
+                                        Must contain one lower &amp; one uppercase letter and one non-alpha character.
+                                    </div>
+                                </div>
+                            </md-input-container>
+                            <md-input-container class="md-icon-float md-block">
+                                <label>Confirm new password</label>
+                                <md-icon md-svg-src="../icons/ic_done_black_24px.svg" ng-show="vm.checkPw()"></md-icon>
+                                <input name="repeatPassword" type="password" ng-model="vm.password.repeatNewPassword"
+                                       ng-disabled="passwordform.password.$invalid" ng-required="true">
+                                <div ng-messages="passwordform.repeatPassword.$error">
+                                    <div ng-message="required">This is required!</div>
+                                    <div ng-show="!vm.checkPw() && !passwordform.repeatPassword.$error.required">Passwords must match!</div>
+                                </div>
+                            </md-input-container>
+                        </md-content>
+                        <br />
+                        <div class="text-center">
+                            <md-button type="submit" class="md-raised md-primary" ng-disabled="passwordform.$invalid || !vm.checkPw()">Change Password</md-button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

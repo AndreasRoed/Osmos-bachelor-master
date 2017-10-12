@@ -1,0 +1,57 @@
+<navigation></navigation>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="table-box box-search">
+                <div class="table-box-header">
+                    <h2><span class="break"></span>Search result</h2>
+                </div>
+                <div class="row text-center">
+                    <!--
+                    <form role="search" name="searchForm">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Search" name="searchField" ng-model="vm.searchStringTemp" ng-required="true" ng-minlength="3" ng-maxlength="30">
+                            <span class="input-group-btn">
+                                <button type="submit" ng-disabled="searchForm.$invalid" class="btn btn-default btn-search" ng-click="vm.submitSearch()" title="Search">
+                                    <i class="glyphicon glyphicon-search"></i>
+                                </button>
+                            </span>
+                        </div>
+                    </form>
+                    -->
+                    <div class="col-md-4 search-results">
+                        <h4>People and Organizations:</h4>
+                        <ul>
+                            <li ng-repeat="data in vm.dataArray | filter: vm.searchFilter">
+                                <a href="" ng-click="vm.showProfile(data._id)" title="Click for more info">
+                                <div ng-if="data.academic">{{data.name}}</div>
+                                <div ng-if="data.industrial">{{data.companyname}}</div>
+                                </a>
+                            </li>
+                            <li class="no-data">No users found matching your search</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4 search-results">
+                        <h4>Projects:</h4>
+                        <ul>
+                            <li>
+
+                            </li>
+                            <li class="no-data">No projects found matching your search</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4 search-results">
+                        <h4>Research:</h4>
+                        <ul>
+                            <li>
+
+                            </li>
+                            <li class="no-data">No research found matching your search</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

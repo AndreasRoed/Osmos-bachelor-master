@@ -1,0 +1,12 @@
+<div class="modal-header">
+    <h3 class="modal-title">Delete tag</h3>
+</div>
+<div class="modal-body">
+    <p>Are you sure you want to delete the tag: {{ t }}</p>
+    <br/>
+    <p>WARNING! This decision can <strong>not</strong> be reversed!</p>
+</div>
+<div class="modal-footer">
+    <md-button class="md-raised md-warn" ng-click="ok()">Delete</md-button>
+    <md-button class="md-raised md-primary" ng-click="cancel()">Cancel</md-button>
+</div>

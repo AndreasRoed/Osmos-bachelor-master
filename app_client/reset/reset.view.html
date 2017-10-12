@@ -1,0 +1,47 @@
+<navigation></navigation>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 col-centered register-box">
+            <h2><span class="fa fa-user-secret"></span> Reset Password</h2>
+            <div class="row">
+                <div class="table-box-content col-md-8 col-centered" ng-show="!show">
+                    <form ng-submit="vm.onSubmit()" name="resetForm">
+                        <md-content class="md-no-momentum" layout-padding>
+                            <md-input-container class="md-icon-float md-block">
+                                <label>Password</label>
+                                <md-icon md-svg-src="../icons/ic_lock_black_24px.svg"></md-icon>
+                                <input name="password" type="password" ng-model="vm.credentials.password"
+                                       ng-pattern="/(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z])/" minlength="8" required>
+                                <div ng-messages="resetForm.password.$error">
+                                    <div ng-message="required">
+                                        This is required!
+                                    </div>
+                                    <div ng-show="resetForm.password.$error.minlength && !resetForm.password.$error.required">
+                                        Must contain at least 8 characters.
+                                    </div>
+                                    <div ng-show="!resetForm.password.$error.required && resetForm.password.$error.pattern">
+                                        Must contain one lower &amp; one uppercase letter and one non-alpha character.
+                                    </div>
+                                </div>
+                            </md-input-container>
+                            <md-input-container class="md-icon-float md-block">
+                                <label>Confirm password</label>
+                                <md-icon md-svg-src="../icons/ic_done_black_24px.svg" ng-show="vm.checkPw()"></md-icon>
+                                <input name="repeatPassword" type="password" ng-model="vm.credentials.repeatPassword"
+                                       ng-disabled="resetForm.password.$invalid" required>
+                                <div ng-messages="resetForm.repeatPassword.$error">
+                                    <div ng-message="required">This is required!</div>
+                                    <div ng-show="!vm.checkPw() && !resetForm.repeatPassword.$error.required">Passwords must match!</div>
+                                </div>
+                            </md-input-container>
+                        </md-content>
+                        <div class="text-center">
+                            <md-button type="submit" class="md-raised md-primary" ng-disabled="resetForm.$invalid || !vm.checkPw()">Complete</md-button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

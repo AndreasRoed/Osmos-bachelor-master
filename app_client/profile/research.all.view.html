@@ -1,0 +1,120 @@
+<navigation></navigation>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="table-box table-box-research-me">
+                <div class="table-box-header">
+                    <h2><span class="break"></span>List of Research</h2>
+                </div>
+                <div class="row">
+                    <div id="profile-research-content" ng-mouseover="edit = true" ng-mouseleave="edit = false" class="col-md-12" ng-repeat="r in vm.research">
+                        <div class="col-md-2" id="profile-research-image">
+                            <div class="image-blend">
+                                <a href="" type="file" ngf-select="vm.uploadResearchPicture($file, r)" accept="image/*" ngf-resize="{width: 200, height: 200, quality: 0.8, centerCrop: true}">
+                                    <img class="img-rounded research-image" title="Update Research Picture" ng-src="{{r.imageURL}}" alt="Research Image">
+                                </a>
+                            </div>
+                        </div>
+                        <form ng-submit="vm.saveResearch(r, researchform)" name="researchform" novalidate>
+                            <div class="col-md-3" id="profile-research-body">
+                                <md-input-container ng-hide="edit">
+                                    <label>Name</label>
+                                    <input class="input-disabled" title="Name" ng-model="r.name" ng-disabled="true">
+                                </md-input-container>
+                                <md-input-container ng-show="edit">
+                                    <label><span class="fa fa-edit"></span> Edit name</label>
+                                    <input name="name" title="Name" md-maxlength="100" ng-model="r.name" ng-required="true">
+                                    <div ng-messages="researchform.name.$error">
+                                        <div ng-message="required">This is required!</div>
+                                        <div ng-message="md-maxlength">That's too long!</div>
+                                    </div>
+                                </md-input-container>
+                                <md-input-container class="md-block md-custom" ng-hide="edit">
+                                    <label>Description</label>
+                                    <textarea class="input-disabled" title="Description" ng-model="r.description" ng-disabled="true"></textarea>
+                                </md-input-container>
+                                <md-input-container class="md-block" ng-show="edit">
+                                    <label><span class="fa fa-edit"></span> Edit description</label>
+                                    <textarea name="description" title="Description" ng-model="r.description" ng-required="true"></textarea>
+                                    <div ng-messages="researchform.description.$error">
+                                        <div ng-message="required">This is required!</div>
+                                    </div>
+                                </md-input-container>
+                            </div>
+                            <div class="col-md-2">
+                                <md-input-container>
+                                    <label>Status</label>
+                                    <input class="input-disabled" title="Status" value="{{(r.active) ? 'Enabled' : 'Disabled'}}" ng-disabled="true">
+                                </md-input-container>
+                                <md-input-container>
+                                    <label>Date Created</label>
+                                    <input class="input-disabled" title="Date" value="{{r.createdAt | date}}" ng-disabled="true">
+                                </md-input-container>
+                            </div>
+                            <div class="col-md-3">
+                                <p>Documents:</p>
+                                <span uib-dropdown on-toggle="toggled(open)">
+                                    <a href id="simple-dropdown" uib-dropdown-toggle>
+                                        {{ (r.documentURLs.length == 0) ? null : ((r.documentURLs.length == 1) ? r.documentURLs.length + ' document' : r.documentURLs.length + ' documents') }}
+                                    </a>
+                                    <ul uib-dropdown-menu aria-labelledby="simple-dropdown">
+                                        <li class="dropdown-submenu" ng-repeat="URL in r.documentURLs">
+                                            <a href="">{{ URL.name }}</a>
+                                            <ul class="dropdown-menu">
+                                                <li><a href="{{ URL.URL }}" target="_blank">Open</a></li>
+                                                <li><a href ng-click="vm.openDeleteDocumentModal(r, URL)">Delete</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </span>
+                                <br /><br />
+                                <md-input-container class="md-icon-float md-block">
+                                    <label>Add Tags</label>
+                                    <md-chips title="Select tag from list or make a new tag by typing tag name and press enter" ng-model="r.tags" md-autocomplete-snap md-transform-chip="vm.transformChip($chip, r.tags)" delete-hint="Delete tag">
+                                        <md-autocomplete
+                                                md-selected-item="selectedItem"
+                                                md-search-text="searchText"
+                                                md-items="item in vm.querySearch(searchText)"
+                                                md-item-text="item.name" placeholder="Add a tag">
+                                            <span md-highlight-text="searchText">{{item.name}}</span>
+                                        </md-autocomplete>
+                                        <md-chip-template>
+                                            <span>
+                                                <strong>{{$chip.name}}</strong>
+                                            </span>
+                                        </md-chip-template>
+                                    </md-chips>
+                                </md-input-container>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="text-right">
+                                    <button type="submit" ng-disabled="researchform.$invalid || !researchform.$dirty" class="btn btn-success button-research" title="Save Changes">
+                                        <i class="fa fa-edit"></i> Save Changes
+                                    </button>
+                                    <button type="button" ng-click="vm.showMatches(r)" class="btn btn-primary button-research" title="Show Matches" ng-disabled="!r.active">
+                                        <i class="fa fa-heart"></i> Show Matches
+                                    </button>
+                                    <a href="" type="file" multiple ngf-select="vm.uploadDocument($files, r, r.documentURLs.length)" accept=".pdf" ng-model="vm.files" ngf-max-size="21MB" ng-disabled="!r.active || r.documentURLs.length >= 5">
+                                        <button type="button" class="btn btn-info button-research" title="Upload Document" ng-disabled="!r.active || r.documentURLs.length >= 5">
+                                            <i class="fa fa-cloud-upload"></i> Upload Document
+                                        </button>
+                                    </a>
+                                    <button type="button" ng-click="vm.disableEnableResearch(r)" ng-show="r.active" class="btn btn-warning button-research" title="Disable Research">
+                                        <i class="fa fa-ban"></i> Disable Research
+                                    </button>
+                                    <button type="button" ng-click="vm.disableEnableResearch(r)" ng-hide="r.active" class="btn btn-success button-research" title="Enable Research">
+                                        <i class="fa fa-check"></i> Enable Research
+                                    </button>
+                                    <button type="button" ng-click="vm.openDeleteModal(r)" class="btn btn-danger button-research" title="Delete Project">
+                                        <i class="fa fa-remove"></i> Delete Project
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

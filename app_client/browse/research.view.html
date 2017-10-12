@@ -1,0 +1,26 @@
+<navigation></navigation>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="table-box box-browse-public" id="content">
+                <div class="table-box-header">
+                    <h2><span class="break"></span>Research</h2>
+                </div>
+                <div class="table-box-content public-profile">
+                    <div class="row">
+                        <div class="col-md-8 col-md-offset-2 text-center">
+                            <h2>{{ vm.researchData.name }}</h2>
+                            <img class="img-rounded profile-image" ng-src="{{vm.researchData.imageURL}}" alt="Research Image">
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row text-center">
+                        <h4>{{ vm.researchData.createdAt | date }}</h4>
+                        <h4>{{ vm.researchData.description }}</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

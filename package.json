@@ -1,0 +1,50 @@
+{
+  "name": "osmos",
+  "version": "0.9.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "web": "https://github.com/s198770/Osmos"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "async": "latest",
+    "body-parser": "latest",
+    "connect-flash": "latest",
+    "cookie-parser": "latest",
+    "cron": "latest",
+    "crypto": "latest",
+    "express": "latest",
+    "express-jwt": "latest",
+    "fs": "latest",
+    "http": "latest",
+    "https": "latest",
+    "jsonwebtoken": "latest",
+    "kerberos": "latest",
+    "mongoose": "latest",
+    "multer": "latest",
+    "nodemailer": "latest",
+    "passport": "latest",
+    "passport-linkedin": "latest",
+    "passport-linkedin-oauth2": "latest",
+    "passport-local": "latest",
+    "path": "latest",
+    "querystring": "latest",
+    "request": "latest",
+    "rimraf": "latest"
+  },
+  "devDependencies": {
+    "jasmine-core": "latest",
+    "karma": "latest",
+    "karma-chrome-launcher": "latest",
+    "karma-cli": "latest",
+    "karma-coverage": "latest",
+    "karma-jasmine": "latest"
+  }
+}

@@ -1,0 +1,99 @@
+<navigation></navigation>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="table-box table-box-projects-me">
+                <div class="table-box-header">
+                    <h2><span class="break"></span>List of Projects</h2>
+                </div>
+                <div class="row">
+                    <div id="profile-project-content" ng-mouseover="edit = true" ng-mouseleave="edit = false" class="col-md-12" ng-repeat="p in vm.projects">
+                        <div class="col-md-2" id="profile-project-image">
+                            <div class="image-blend">
+                                <a href="" type="file" ngf-select="vm.uploadProjectPicture($file, p)" accept="image/*" ngf-resize="{width: 200, height: 200, quality: 0.8, centerCrop: true}">
+                                    <img class="img-rounded project-image" title="Update Project Picture" ng-src="{{p.imageURL}}" alt="Project Image">
+                                </a>
+                            </div>
+                        </div>
+                        <form ng-submit="vm.saveProject(p, projectform)" name="projectform" novalidate>
+                            <div class="col-md-3" id="profile-project-body">
+                                <md-input-container ng-hide="edit">
+                                    <label>Name</label>
+                                    <input class="input-disabled" title="Name" ng-model="p.name" ng-disabled="true">
+                                </md-input-container>
+                                <md-input-container ng-show="edit">
+                                    <label><span class="fa fa-edit"></span> Edit name</label>
+                                    <input name="name" title="Name" md-maxlength="100" ng-model="p.name" ng-required="true">
+                                    <div ng-messages="projectform.name.$error">
+                                        <div ng-message="required">This is required!</div>
+                                        <div ng-message="md-maxlength">That's too long!</div>
+                                    </div>
+                                </md-input-container>
+                                <md-input-container class="md-block" ng-hide="edit">
+                                    <label>Description</label>
+                                    <textarea class="input-disabled" title="Description" ng-model="p.description" ng-disabled="true"></textarea>
+                                </md-input-container>
+                                <md-input-container class="md-block" ng-show="edit">
+                                    <label><span class="fa fa-edit"></span> Edit description</label>
+                                    <textarea name="description" title="Description" ng-model="p.description" ng-required="true"></textarea>
+                                    <div ng-messages="projectform.description.$error">
+                                        <div ng-message="required">This is required!</div>
+                                    </div>
+                                </md-input-container>
+                            </div>
+                            <div class="col-md-2">
+                                <md-input-container>
+                                    <label>Status</label>
+                                    <input class="input-disabled" title="Status" value="{{(p.active) ? 'Enabled' : 'Disabled'}}" ng-disabled="true">
+                                </md-input-container>
+                                <md-input-container>
+                                    <label>Date Created</label>
+                                    <input class="input-disabled" title="Date" value="{{p.createdAt | date}}" ng-disabled="true">
+                                </md-input-container>
+                            </div>
+                            <div class="col-md-3">
+                                <md-input-container class="md-icon-float md-block">
+                                    <label>Add Tags</label>
+                                    <md-chips title="Select tag from list or make a new tag by typing tag name and press enter" ng-model="p.tags" md-autocomplete-snap md-transform-chip="vm.transformChip($chip, p.tags)" delete-hint="Delete tag">
+                                        <md-autocomplete
+                                                md-selected-item="selectedItem"
+                                                md-search-text="searchText"
+                                                md-items="item in vm.querySearch(searchText)"
+                                                md-item-text="item.name" placeholder="Add a tag">
+                                            <span md-highlight-text="searchText">{{item.name}}</span>
+                                        </md-autocomplete>
+                                        <md-chip-template>
+                                            <span>
+                                                <strong>{{$chip.name}}</strong>
+                                            </span>
+                                        </md-chip-template>
+                                    </md-chips>
+                                </md-input-container>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="text-right">
+                                    <button type="submit" ng-disabled="projectform.$invalid || !projectform.$dirty" class="btn btn-success button-projects" title="Save Changes">
+                                        <i class="fa fa-edit"></i> Save Changes
+                                    </button>
+                                    <button type="button" ng-click="vm.showMatches(p)" class="btn btn-primary button-projects" title="Show Matches" ng-disabled="!p.active">
+                                        <i class="fa fa-heart"></i> Show Matches
+                                    </button>
+                                    <button type="button" ng-click="vm.disableEnableProject(p)" ng-show="p.active" class="btn btn-warning button-projects" title="Disable Project">
+                                        <i class="fa fa-ban"></i> Disable Project
+                                    </button>
+                                    <button type="button" ng-click="vm.disableEnableProject(p)" ng-show="!p.active" class="btn btn-success button-projects" title="Enable Project">
+                                        <i class="fa fa-check"></i> Enable Project
+                                    </button>
+                                    <button type="button" ng-click="vm.openDeleteModal(p)" class="btn btn-danger button-projects" title="Delete Project">
+                                        <i class="fa fa-remove"></i> Delete Project
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

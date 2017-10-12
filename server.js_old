@@ -1,0 +1,68 @@
+var config = require('./config/config'),
+    mongoose = require('./config/mongoose'),
+    express = require('./config/express'),
+    passport = require('./config/passport'),
+    fs = require('fs'),
+    https = require('https'),
+    http = require('http');
+
+var db = mongoose().connection,
+    app = express(),
+    pass = passport();
+
+var options = {
+    key: fs.readFileSync('key.pem'),
+    cert: fs.readFileSync('cert.pem')
+};
+
+db.on('error', function(err) {
+    if (err.name === 'MongoError') {
+        console.log('No database connection found...');
+        console.log('Shutting down...');
+        process.exit();
+    }});
+
+db.once('open', function() {
+    console.log("Connected to database...");
+    https.createServer(options, app)
+        .listen(config.port, function() {
+            console.log('Server running at port ' + config.port + '...');
+            http.createServer(function (req, res) {
+                // set http headers for security measures
+                res.setHeader('x-frame-options', 'SAMEORIGIN');
+                res.setHeader('X-XSS-Protection', '1; mode=block');
+                res.setHeader('X-Content-Type-Options', 'nosniff');
+                //res.setHeader('Content-Security-Policy', 'default-src \'self\'');
+                //res.setHeader('Content-Security-Policy-Report-Only', 'default-src \'self\'; report-uri');
+
+                // IE/Edge fix
+                res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+                res.setHeader("Pragma", "no-cache");
+                res.setHeader("Expires","Mon, 26 Jul 1997 05:00:00 GMT");
+
+                res.removeHeader('X-Powered-By');
+                // url redirection
+                res.writeHead(301, { "Location": "https://" + req.headers['host'] + req.url });
+                res.end();
+            })
+                .listen(config.redirectPort, function() {
+                    console.log('Redirect server running at port ' + config.redirectPort + '...');
+                })
+                .on('error', function(err) {
+                    if (err.code === 'EADDRINUSE') {
+                        console.log('Port ' + config.port + ' already in use...');
+                        console.log('Shutting down...');
+                        process.exit();
+                    }
+                });
+        })
+        .on('error', function(err) {
+            if (err.code === 'EADDRINUSE') {
+                console.log('Port ' + config.port + ' already in use...');
+                console.log('Shutting down...');
+                process.exit();
+            }
+        });
+});
+
+module.exports = app;

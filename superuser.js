@@ -1,0 +1,26 @@
+use osmos
+db.users.save({
+    email: 'root@root.root',
+    pwdSalt: '087649c63ebe03cabc8a9392490aa3b1',
+    pwdHash: '9457f01f28f3bae6d3d8e7970ac299e10d88d5e58fb538b4c71b63feac9318001b264b4bf4ff8f02c9f363095ced2473767cd91e62b99534d19277ab8300b67f',
+    academic: true,
+    industrial: true,
+    admin: true,
+    disabled: false,
+    firstname: 'Root',
+    lastname: 'Root',
+    country: 'NO',
+    city: 'Root',
+    zipcode: '1111',
+    address: 'Root',
+    subscription: false,
+    gender: 'Other',
+    phone: '12345678',
+    about: 'Root',
+    education: 'Root',
+    degree: 'Root',
+    companyname: 'Root',
+    userLevel: 1,
+    createdAt: new Date(),
+    imageURL: 'images/empty_profile.png'
+});

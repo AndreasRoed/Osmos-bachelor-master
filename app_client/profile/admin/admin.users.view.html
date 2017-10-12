@@ -1,0 +1,79 @@
+<navigation></navigation>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="table-box table-box-users">
+                <div class="table-box-header">
+                    <h2><span class="break"></span>Manage Users</h2>
+                </div>
+                <div class="table-box-content">
+                    <table st-table="adminUsers" st-safe-src="vm.tableAdminUsers" class="table table-striped">
+                        <colgroup>
+                            <col class="table-col-width-5">
+                            <col class="table-col-width-25">
+                            <col class="table-col-width-25">
+                            <col class="table-col-width-15">
+                            <col class="table-col-width-10">
+                            <col class="table-col-width-5">
+                            <col class="table-col-width-15">
+                        </colgroup>
+                        <thead>
+                            <tr class="table-sortable">
+                                <th></th>
+                                <th st-sort="email">Email</th>
+                                <th st-sort="name">Name</th>
+                                <th st-sort="date">Date registered</th>
+                                <th st-sort="type">Type</th>
+                                <th st-sort="status">Status</th>
+                            </tr>
+                            <tr>
+                                <th colspan="7"><input st-search="" class="form-control" placeholder="global search ..." type="text"/></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="user in adminUsers">
+                                <td><img class="img-rounded" id="profile-image-thumb" ng-src="{{vm.thumbURL(user.imageURL)}}"></td>
+                                <td>{{ user.email }}</td>
+                                <td ng-show="user.academic">{{ user.firstname + " " + user.lastname }}</td>
+                                <td ng-show="user.industrial && !user.academic">{{ user.companyname }}</td>
+                                <td>{{ user.createdAt | date}}</td>
+                                <td class="table-checkbox-center" ng-show="user.academic && !user.admin">Academic</td>
+                                <td class="table-checkbox-center" ng-show="user.industrial && !user.academic && !user.admin">Industrial</span></td>
+                                <td class="table-checkbox-center" ng-show="user.admin">Admin</td>
+                                <td class="table-checkbox-center" ng-show="!user.disabled">Enabled</td>
+                                <td class="table-checkbox-center" ng-show="user.disabled">Disabled</td>
+                                <td>
+                                    <div class="text-right">
+                                        <button type="button" ng-click="vm.adminUser(user)" ng-hide="user.admin" class="btn btn-sm btn-primary" title="Make Admin">
+                                            <i class="glyphicon glyphicon-king"></i>
+                                        </button>
+                                        <button type="button" ng-click="vm.adminUser(user)" ng-show="user.admin" class="btn btn-sm btn-default" title="Remove Admin">
+                                            <i class="glyphicon glyphicon-king"></i>
+                                        </button>
+                                        <button type="button" ng-click="vm.disableEnableUser(user)" ng-hide="user.disabled" class="btn btn-sm btn-warning" title="Disable User">
+                                            <i class="fa fa-ban"></i>
+                                        </button>
+                                        <button type="button" ng-click="vm.disableEnableUser(user)" ng-show="user.disabled" class="btn btn-sm btn-success" title="Enable User">
+                                            <i class="fa fa-check"></i>
+                                        </button>
+                                        <button type="button" ng-click="vm.openDeleteModal(user)" class="btn btn-sm btn-danger" title="Delete User">
+                                            <i class="fa fa-remove"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr class="table-pagination">
+                                <td colspan="11" class="text-center">
+                                    <div st-pagination="" st-items-by-page="vm.itemsByPage" st-displayed-pages="5"></div>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

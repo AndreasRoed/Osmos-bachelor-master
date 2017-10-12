@@ -1,0 +1,75 @@
+<navigation></navigation>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="table-box table-box-research-me">
+                <div class="table-box-header">
+                    <h2><span class="break"></span>Create Research</h2>
+                </div>
+                <div class="table-box-content">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <form ng-submit="vm.createMain()" name="researchNewForm">
+                                <md-content class="md-no-momentum" layout-padding>
+                                    <md-input-container class="md-icon-float md-block">
+                                        <label for="researchName">Research Name</label>
+                                        <md-icon md-svg-src="../icons/ic_person_black_24px.svg"></md-icon>
+                                        <input name="name" id="researchName" ng-model="vm.research.name" type="text"
+                                               md-maxlength="100" minlength="3" required>
+                                        <div ng-messages="researchNewForm.name.$error">
+                                            <div ng-message="required">This is required!</div>
+                                            <div ng-message="md-maxlength">That's too long!</div>
+                                        </div>
+                                    </md-input-container>
+                                    <md-input-container class="md-icon-float md-block">
+                                        <label for="researchDescription">Description</label>
+                                        <md-icon md-svg-src="../icons/ic_description_black_24px.svg"></md-icon>
+                                        <input name="description" id="researchDescription" ng-model="vm.research.description" type="text"
+                                               minlength="3" required>
+                                        <div ng-messages="researchNewForm.description.$error">
+                                            <div ng-message="required">This is required!</div>
+                                        </div>
+                                    </md-input-container>
+                                    <md-input-container class="md-icon-float md-block">
+                                        <label for="researchType">Type</label>
+                                        <md-icon md-svg-src="../icons/ic_terrain_black_24px.svg"></md-icon>
+                                        <md-select id="researchType" ng-model="vm.research.type" placeholder="Select type" required>
+                                            <md-option ng-repeat="t in vm.types" value="{{t._id}}">{{t.type}}</md-option>
+                                        </md-select>
+                                    </md-input-container>
+                                    <br />
+                                    <md-input-container class="md-icon-float md-block">
+                                        <label for="researchTags">Tags</label>
+                                        <md-chips title="Select tag from list or make a new tag by typing tag name and press enter" id="researchTags" ng-model="vm.research.tags" md-autocomplete-snap
+                                                  md-transform-chip="vm.transformChip($chip)">
+                                            <md-autocomplete
+                                                    md-selected-item="vm.selectedItem"
+                                                    md-search-text="vm.searchText"
+                                                    md-items="item in vm.querySearch(vm.searchText)"
+                                                    md-item-text="item.name" placeholder="Add a tag">
+                                                <span md-highlight-text="vm.searchText">{{item.name}}</span>
+                                            </md-autocomplete>
+                                            <md-chip-template>
+                                                <span>
+                                                  <strong>{{$chip.name}}</strong>
+                                                </span>
+                                            </md-chip-template>
+                                        </md-chips>
+                                        <div class="tags-validation-messages">{{tagsError}}</div>
+                                    </md-input-container>
+                                    <label for="researchUpload">Upload Research</label>
+                                    <input id="researchUpload" type="file" ngf-select multiple ngf-max-size="20MB" ng-model="vm.files" accept=".pdf" name="file">
+                                    <div class="text-danger" ng-show="researchNewForm.$invalid">Max file size is 20MB</div>
+                                    <div class="text-center">
+                                        <md-button type="submit" class="md-raised md-primary" ng-disabled="researchNewForm.$invalid || !researchNewForm.$dirty || !vm.checkResearchTags()">Create Research</md-button>
+                                    </div>
+                                </md-content>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

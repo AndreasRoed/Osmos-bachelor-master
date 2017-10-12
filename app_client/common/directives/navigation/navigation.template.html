@@ -1,0 +1,66 @@
+<nav class="navbar navbar-inverse navbar-static-top">
+    <div class="container-fluid navbar-main">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-main" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="" ng-click="navvm.showHome()">
+                <img id="osmos-logo-nav" src="images/logo_nav_small.png" alt="Osmos logo">
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="navbar-collapse-main">
+            <ul class="nav navbar-nav navbar-left">
+                <li id="browse-nav" ng-class="{ active: navvm.isActive('/browse')}"><a href="" ng-click="navvm.showBrowse()" ng-show="navvm.currentUser != null">Browse</a></li>
+
+                <!-- Search form -->
+                <form class="navbar-form navbar-left" role="search" name="searchForm" ng-if="navvm.currentUser != null">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search" name="searchField" ng-model="navvm.searchField" ng-required="true" ng-minlength="3" ng-maxlength="30">
+                            <span class="input-group-btn">
+                                <button type="submit" ng-disabled="searchForm.$invalid" class="btn btn-default btn-search" ng-click="navvm.submitSearch()" title="Search">
+                                    <i class="glyphicon glyphicon-search"></i>
+                                </button>
+                            </span>
+                    </div>
+                </form>
+            </ul>
+
+            <ul class="nav navbar-nav navbar-nav-dropdown navbar-right" ng-cloak>
+                <!--  My profile dropdown  -->
+                <li class="{{dropdownUserClass}}" ng-show="navvm.currentUser != null" ng-mouseleave="dropdownUserClass='dropdown'" ng-mouseenter="dropdownUserClass='dropdown open'">
+                    <a ng-show="!navvm.currentUser.industrial || (navvm.currentUser.industrial && navvm.currentUser.academic)" href="" class="dropdown-toggle" data-toggle="dropdown">
+                        <img ng-src="{{vm.user.imageURL}}" class="img-rounded profile-image-navbar"> {{vm.user.firstname + " " + vm.user.lastname}} <b class="caret"></b>
+                    </a>
+                    <a ng-show="navvm.currentUser.industrial && !navvm.currentUser.academic" href="" class="dropdown-toggle" data-toggle="dropdown">
+                        <img ng-src="{{vm.user.imageURL}}" class="img-rounded profile-image-navbar"> {{vm.user.companyname}} <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li ng-class="{ active: navvm.isActive('/profile/me')}"><a href="" ng-click="navvm.showProfile()"><span class="glyphicon glyphicon-home"></span> My profile</a></li>
+                        <li ng-if="navvm.currentUser != null && navvm.currentUser.admin" role="separator" class="divider"></li>
+                        <li ng-class="{ active: navvm.isActive('/profile/admin/users')}" ng-if="navvm.currentUser != null && navvm.currentUser.admin"><a href="" ng-click="navvm.goToProfile('admin/users')"><span class="fa fa-users"></span> Manage Users</a></li>
+                        <li ng-class="{ active: navvm.isActive('/profile/admin/research')}" ng-if="navvm.currentUser != null && navvm.currentUser.admin"><a href="" ng-click="navvm.goToProfile('admin/research')"><span class="fa fa-file"></span> Manage Research</a></li>
+                        <li ng-class="{ active: navvm.isActive('/profile/admin/projects')}" ng-if="navvm.currentUser != null && navvm.currentUser.admin"><a href="" ng-click="navvm.goToProfile('admin/projects')"><span class="fa fa-industry"></span> Manage Projects</a></li>
+                        <li ng-class="{ active: navvm.isActive('/profile/admin/tags')}" ng-if="navvm.currentUser != null && navvm.currentUser.admin"><a href="" ng-click="navvm.goToProfile('admin/tags')"><span class="fa fa-tags"></span> Manage Tags</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li ng-class="{ active: navvm.isActive('/profile/research/all')}" ng-show="navvm.user.academic"><a href="" ng-click="navvm.goToProfile('research/all')"><span class="fa fa-file"></span> My Research</a></li>
+                        <li ng-class="{ active: navvm.isActive('/profile/research/new')}" ng-show="navvm.user.academic"><a href="" ng-click="navvm.goToProfile('research/new')"><span class="fa fa-file-text"></span> New Research</a></li>
+                        <li ng-class="{ active: navvm.isActive('/profile/project/all')}" ng-show="navvm.user.industrial"><a href="" ng-click="navvm.goToProfile('project/all')"><span class="fa fa-industry"></span> My Projects</a></li>
+                        <li ng-class="{ active: navvm.isActive('/profile/project/new')}" ng-show="navvm.user.industrial"><a href="" ng-click="navvm.goToProfile('project/new')"><span class="fa fa-clipboard"></span> New Project</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li class="disabled"><a href=""><span class="glyphicon glyphicon-shopping-cart"></span> Subscription</a></li>
+                        <li><a href="" ng-click="navvm.goToProfile('settings')"><span class="glyphicon glyphicon-cog"></span> Settings</a></li>
+                        <li><a href="" ng-click="navvm.showHelp()"><span class="glyphicon glyphicon-info-sign"></span> Help</a></li>
+                        <li><a href="" ng-click="navvm.logout()"><span class="glyphicon glyphicon-log-out"></span> Log out</a></li>
+                    </ul>
+                </li>
+                <li ng-if="navvm.currentUser == null"><a href="" ng-click="navvm.showLogin()"><span class="glyphicon glyphicon-log-in"></span> LOG IN</a></li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>

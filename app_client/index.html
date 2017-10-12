@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Osmos - Catalyzing change</title>
+    <meta charset="utf-8">
+    <meta name="author" content="The Osmos Team">
+    <meta name="description" content="Osmos - Catalysing Change. Network of IT academics and practitioners. Facilitate
+        IT innovation by closing the knowledge and communication gap between industry and academia by establishing a collaborative
+        network with actors from both sides of the divide.">
+    <meta name="keyword" content="Osmos, Research, Knowledge, Professional, Consortia, Academia, Academics, IT professional, Collaboration">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="icon" href="/icons/favicon.ico" sizes="16x16 24x24 32x32 48x48 64x64" type="image/vnd.microsoft.icon">
+
+    <script src="/js/jquery-2.2.3.min.js"></script>
+    <script src="/js/angular.min.js"></script>
+    <script src="/js/angular-route.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/ui-bootstrap-tpls-1.2.1.min.js"></script>
+    <script src="/js/ng-tags-input.min.js"></script>
+    <script src="/js/smart-table.min.js"></script>
+    <script src="/js/ng-file-upload.min.js"></script>
+    <script src="/js/ng-file-upload-shim.min.js"></script>
+    <script src="/js/checklist-model.js"></script>
+    <script src="/js/ng-infinite-scroll.min.js"></script>
+    <script src="/js/angular-material.min.js"></script>
+    <script src="/js/angular-messages.min.js"></script>
+    <script src="/js/angular-animate.min.js"></script>
+    <script src="/js/angular-aria.min.js"></script>
+
+    <script src="/js/respond.min.js"></script>
+    <script src="/js/html5shiv.min.js"></script>
+    <script src="/js/selectivizr.min.js"></script>
+
+    <!-- respond.min.js is a fast & lightweight polyfill for min/max-width CSS3 Media Queries (for IE 6-8, and more) -->
+    <!-- html5shiv.min.js is the defacto way to enable use of HTML5 sectioning elements in legacy Internet Explorer. -->
+    <!-- selectivizr is a JavaScript utility that emulates CSS3 pseudo-classes and attribute selectors in Internet
+    Explorer 6-8. Simply include the script in your pages and selectivizr will do the rest. -->
+
+    <link rel="stylesheet" href="/css/normalize.css" type="text/css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="/css/bootstrap-theme.min.css" type="text/css">
+    <link rel="stylesheet" href="/css/animate.min.css" type="text/css">
+    <link rel="stylesheet" href="/css/ng-tags-input.min.css" type="text/css">
+    <link rel="stylesheet" href="/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="/css/academicons.css" type="text/css">
+    <link rel="stylesheet" href="/css/angular-material.min.css" type="text/css">
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+    <link rel="stylesheet" href="/css/queries.css" type="text/css">
+
+    <!-- normalize.css makes browsers render all elements more consistently and in line with modern standards.
+    It precisely targets only the styles that need normalizing. -->
+    <!-- bootstrap is the most popular HTML, CSS, and JS framework for developing responsive,
+    mobile first projects on the web. -->
+    <!-- animate for css animations -->
+    <!-- queries.css contains styling for responsive design -->
+    <!-- style.css contains custom styling for the whole website -->
+
+    <!--must add all controller js files here-->
+    <script type="application/javascript" src="/index.controller.js"></script>
+    <script type="application/javascript" src="/home/home.controller.js"></script>
+    <script type="application/javascript" src="/register/register.controller.js"></script>
+    <script type="application/javascript" src="/profile/profile.me.controller.js"></script>
+    <script type="application/javascript" src="/profile/settings.controller.js"></script>
+    <script type="application/javascript" src="/profile/project.all.controller.js"></script>
+    <script type="application/javascript" src="/profile/project.new.controller.js"></script>
+    <script type="application/javascript" src="/profile/research.all.controller.js"></script>
+    <script type="application/javascript" src="/profile/research.new.controller.js"></script>
+    <script type="application/javascript" src="/profile/public/profile.controller.js"></script>
+    <script type="application/javascript" src="/profile/admin/admin.tags.controller.js"></script>
+    <script type="application/javascript" src="/profile/admin/admin.users.controller.js"></script>
+    <script type="application/javascript" src="/profile/admin/admin.research.controller.js"></script>
+    <script type="application/javascript" src="/profile/admin/admin.projects.controller.js"></script>
+    <script type="application/javascript" src="/profile/matching/match.project.controller.js"></script>
+    <script type="application/javascript" src="/profile/matching/match.research.controller.js"></script>
+    <script type="application/javascript" src="/reset/reset.controller.js"></script>
+    <script type="application/javascript" src="/activate/activate.controller.js"></script>
+    <script type="application/javascript" src="/search/search.controller.js"></script>
+    <script type="application/javascript" src="/browse/browse.controller.js"></script>
+    <script type="application/javascript" src="/browse/project.controller.js"></script>
+    <script type="application/javascript" src="/browse/research.controller.js"></script>
+    <script type="application/javascript" src="/help/help.controller.js"></script>
+    <script type="application/javascript" src="/error/error.controller.js"></script>
+
+    <script type="application/javascript" src="/common/directives/navigation/navigation.controller.js"></script>
+    <script type="application/javascript" src="/common/directives/navigation/navigation.directive.js"></script>
+    <script type="application/javascript" src="/common/services/data.service.js"></script>
+    <script type="application/javascript" src="/common/services/authentication.service.js"></script>
+    <script type="application/javascript" src="/common/services/facebook.service.js"></script>
+    <script type="application/javascript" src="/common/services/linkedin.service.js"></script>
+    <script type="application/javascript" src="/common/services/upload.service.js"></script>
+    <script type="application/javascript" src="/common/services/toast.service.js"></script>
+
+    <base href="/">
+</head>
+
+<body ng-app="meanApp"><div ng-view></div></body>
+
+</html>

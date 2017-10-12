@@ -1,0 +1,210 @@
+<navigation></navigation>
+
+<div class="container">
+    <div class="row" id="browse-categories">
+        <div class="col-md-12">
+            <div class="browse-content-main">
+                <uib-tabset active="activeJustified" justified="true">
+
+                    <!---------------------
+                        PROJECT TAB
+                    ----------------------->
+                    <uib-tab index="0" heading="Projects">
+                        <div class="row" id="browse-project">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <tags-input ng-model="vm.searchTagsProject" replace-spaces-with-dashes="false" add-from-autocomplete-only="true" display-property="name" key-property="_id" placeholder="Add search tags..">
+                                        <auto-complete source="vm.filteredTagsAutoComplete($query)"></auto-complete>
+                                    </tags-input>
+                                </div>
+                            </div>
+                            <div class="col-md-9 accordion-overflow1">
+                            <uib-accordion>
+                                <uib-accordion-group is-open="status.open">
+                                    <uib-accordion-heading>
+                                        <div>
+                                            Filter search criterias <i class="pull-right glyphicon"
+                                                     ng-class="{'glyphicon-chevron-down': status.open,
+                                                            'glyphicon-chevron-right': !status.open}"></i>
+                                        </div>
+                                    </uib-accordion-heading>
+                                    <div class="col-md-5">
+                                        <h3>Types of industry:</h3>
+                                        <label class="label-block">
+                                            <input type="checkbox" ng-click="vm.selectAllIndustries()" ng-model="vm.industriesSelected"> Select All
+                                        </label>
+                                        <hr class="checkBoxLineProjects">
+                                        <label class="label-block" ng-repeat="i in vm.industries" >
+                                            <input type="checkbox" checklist-model="vm.checkIndustry" checklist-value="i._id"> {{i.industry}}
+                                        </label>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <h3>Area of operation:</h3>
+                                        <label class="label-block">
+                                            <input type="checkbox" ng-click="vm.selectAllFunctions()" ng-model="vm.functionsSelected"> Select All
+                                        </label>
+                                        <hr class="checkBoxLineProjects">
+                                        <label class="label-block" ng-repeat="i in vm.functions">
+                                            <input type="checkbox" checklist-model="vm.checkFunction" checklist-value="i._id"> {{i.function}}
+                                        </label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <h3>In which regions:</h3>
+                                        <label class="label-block">
+                                            <input type="checkbox" ng-click="vm.selectAllRegions()" ng-model="vm.regionsSelected"> Select All
+                                        </label>
+                                        <hr class="checkBoxLineProjects">
+                                        <label class="label-block" ng-repeat="i in vm.regions">
+                                            <input type="checkbox" checklist-model="vm.checkRegion" checklist-value="i._id"> {{i.region}}
+                                        </label>
+                                    </div>
+                                </uib-accordion-group>
+                            </uib-accordion>
+                        </div>
+                        </div>
+
+                        <!---------------------
+                            PROJECT CONTENT
+                        ----------------------->
+
+                        <div class="row">
+                            <a href="" class="col-xs-12 col-md-12" ng-click="vm.showProject(p._id)" id="browse-project-content" ng-repeat="p in vm.projectsArray"
+                               ng-if="vm.checkProjectsAgainstFilters(p)">
+                                <div class="col-md-3">
+                                    <img class="img-rounded" id="browse-project-image" ng-src="{{p.imageURL}}" title="Project Image" alt="Project Image">
+                                </div>
+                                <div class="col-md-9" id="browse-project-body">
+                                    <h3>{{p.name}}</h3>
+                                    <p id="browse-project-info">
+                                        <i class="fa fa-calendar-times-o"></i> {{p.createdAt | date}}<br />
+                                    </p>
+                                    <p>
+                                        <i class="fa fa-paper-plane"></i> Project description:<br />
+                                        {{p.description}}
+                                    </p>
+                                </div>
+                            </a>
+                        </div>
+                    </uib-tab>
+
+
+
+                    <!---------------------
+                        RESEARCH TAB
+                    ----------------------->
+                    <uib-tab index="1" heading="Research">
+                        <div class="row" id="browse-research">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <tags-input ng-model="vm.searchTagsResearch" replace-spaces-with-dashes="false" add-from-autocomplete-only="true" display-property="name" key-property="_id" placeholder="Add search tags..">
+                                        <auto-complete source="vm.filteredTagsAutoComplete($query)"></auto-complete>
+                                    </tags-input>
+                                </div>
+                            </div>
+                            <div class="col-md-9 accordion-overflow1">
+                                <uib-accordion>
+                                    <uib-accordion-group is-open="status.open">
+                                        <uib-accordion-heading>
+                                            <div>
+                                                Filter types of research <i class="pull-right glyphicon"
+                                                           ng-class="{'glyphicon-chevron-down': status.open,
+                                                            'glyphicon-chevron-right': !status.open}"></i>
+                                            </div>
+                                        </uib-accordion-heading>
+
+                                        <div class="col-md-12">
+                                            <label class="label-block">
+                                                <input type="checkbox" ng-click="vm.selectAllTypes()" ng-model="vm.typesSelected"> Select All
+                                            </label>
+                                        </div>
+                                        <hr class="checkBoxLineResearch">
+
+                                        <div class="col-md-6">
+                                            <label style="display: block;" ng-repeat="i in vm.types" ng-if="$index % 2==0">
+                                                <input type="checkbox" checklist-model="vm.checkTypes" checklist-value="i._id"> {{i.type}}
+                                            </label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label style="display: block;" ng-repeat="i in vm.types" ng-if="$index % 2==1">
+                                                <input type="checkbox" checklist-model="vm.checkTypes" checklist-value="i._id"> {{i.type}}
+                                            </label>
+                                        </div>
+                                    </uib-accordion-group>
+                                </uib-accordion>
+                            </div>
+                        </div>
+
+                        <!---------------------
+                            RESEARCH CONTENT
+                        ----------------------->
+                        <div class="row">
+                            <a href="" class="col-xs-12 col-md-12" ng-click="vm.showResearch(r._id)" id="browse-research-content" ng-repeat="r in vm.researchesArray"
+                               ng-if="vm.checkResearchAgainstFilters(r)">
+                                <div class="col-md-3">
+                                    <img class="img-rounded" id="browse-research-image" ng-src="{{r.imageURL}}" title="Research Image" alt="Research Image">
+                                </div>
+                                <div class="col-md-9" id="browse-research-body">
+                                    <h3>{{r.name}}</h3>
+                                    <p id="browse-research-info">
+                                        <i class="fa fa-calendar-times-o"></i> {{r.createdAt | date}}<br />
+                                    </p>
+                                    <p>
+                                        <i class="fa fa-paper-plane"></i> Research description:<br />
+                                        {{r.description}}
+                                    </p>
+                                </div>
+                            </a>
+                        </div>
+                    </uib-tab>
+
+
+                    <!---------------------
+                        USERS TAB
+                    ----------------------->
+                    <uib-tab index="2" heading="People and Organizations">
+                        <div class="row" id="browse-users">
+
+                            <div class="col-md-4 col-md-offset-3">
+                                <label>
+                                    <input type="checkbox" ng-model="vm.checkAcademic"> Academic Partners
+                                </label>
+                            </div>
+                            <div class="col-md-4">
+                                <label>
+                                    <input type="checkbox" ng-model="vm.checkIndustrial"> Industrial Partners
+                                </label>
+                            </div>
+                        </div>
+
+                        <!---------------------
+                            USERS CONTENT
+                        ----------------------->
+                        <div class="row">
+                            <!-- ng-repeat over found matches -->
+                            <a href="" class="col-xs-12 col-md-12 col-lg-6" ng-click="vm.showProfile(user._id)" id="browse-users-content" ng-repeat="user in vm.usersArray"
+                               ng-if="vm.checkUsersAgainstFilters(user)">
+                                <div class="col-md-4" id="browse-users-image">
+                                    <img class="img-rounded" ng-src="{{ user.imageURL }}" title="Profile Image" alt="Profile Image">
+                                </div>
+                                <div class="col-md-8" id="browse-users-body">
+                                    <h4 ng-show="user.academic == true">{{user.lastname + ", " + user.firstname}}</h4>
+                                    <h4 ng-show="user.industrial == true">{{user.companyname}}</h4>
+                                    <small class="small-city-country"><cite title="area">{{user.city + ", " + vm.getCountry(user.country) + " "}} <i class="fa fa-map-marker">
+                                    </i></cite></small>
+                                    <p class="browse-user-info" ng-show="user.academic">
+                                        <i class="fa fa-building"></i> {{user.job_place}}<br />
+                                        <i class="fa fa-briefcase"></i> {{user.job_title}}<br />
+                                        <i class="fa fa-tags"></i> Academic Partner
+                                    </p>
+                                    <p class="browse-user-info" ng-show="user.industrial">
+                                        <i class="fa fa-tags"></i> Industrial Partner
+                                    </p>
+                                </div>
+                            </a>
+                        </div>
+                    </uib-tab>
+                </uib-tabset>
+            </div>
+        </div>
+    </div>
+</div>

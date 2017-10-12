@@ -1,0 +1,140 @@
+<navigation></navigation>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="table-box box-matching">
+                <div class="table-box-header">
+                    <h2><span class="break"></span>Research to Match</h2>
+                </div>
+                <div class="profile-content">
+                    <div class="row">
+                        <div id="profile-research-content" class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-2" id="profile-research-image">
+                                    <div class="project-image">
+                                        <img class="img-rounded research-image" title="Research Image" ng-src="{{vm.matchedResearch.imageURL}}" alt="Research Image">
+                                    </div>
+                                </div>
+                                <div class="col-md-3" id="profile-research-body">
+                                    <md-input-container>
+                                        <label>Name</label>
+                                        <input class="input-disabled" title="Name" placeholder="Name" ng-model="vm.matchedResearch.name" ng-disabled="true">
+                                    </md-input-container>
+                                    <md-input-container class="md-block md-custom">
+                                        <label>Description</label>
+                                        <textarea class="input-disabled" title="Description" placeholder="Description" ng-model="vm.matchedResearch.description" ng-disabled="true"></textarea>
+                                    </md-input-container>
+                                </div>
+                                <div class="col-md-2">
+                                    <md-input-container>
+                                        <label>Date Created</label>
+                                        <input class="input-disabled" title="Date" value="{{vm.matchedResearch.createdAt | date}}" ng-disabled="true">
+                                    </md-input-container>
+                                </div>
+                                <div class="col-md-4 col-md-offset-1">
+                                    <p>Documents:</p>
+                                    <md-content layout="column">
+                                        <md-chips ng-repeat="URL in vm.matchedResearch.documentURLs">
+                                            <md-chip>
+                                                <a href="{{ URL.URL }}" target="_blank"><strong>{{ URL.name }}</strong></a>
+                                            </md-chip>
+                                        </md-chips>
+                                    </md-content>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-9 col-md-offset-2">
+                                    <p>Tags:</p>
+                                    <md-content layout="row">
+                                        <md-chips ng-repeat="tag in vm.matchedResearch.tags">
+                                            <md-chip>
+                                                <strong>{{tag.name}}</strong>
+                                            </md-chip>
+                                        </md-chips>
+                                    </md-content>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row text-center text-danger" ng-show="vm.matchingError !== undefined">
+        <h3>{{ vm.matchingError }}</h3>
+    </div>
+    <div class="row" ng-show="vm.matchingError === undefined">
+        <div class="col-md-12">
+            <div class="table-box col-md-12 box-matching">
+                <div class="table-box-header">
+                    <h2><span class="break"></span>Matching Project</h2>
+                </div>
+                <div class="profile-content">
+                    <div class="row">
+                        <div id="profile-project-content" class="col-md-12" ng-repeat="p in vm.matchedProjects">
+                            <div class="row">
+                                <div class="col-md-2" id="profile-project-image">
+                                    <div class="project-image">
+                                        <img class="img-rounded research-image" title="Project Image" ng-src="{{p.imageURL}}" alt="Project Image">
+                                    </div>
+                                </div>
+                                <div class="col-md-3" id="profile-project-body">
+                                    <md-input-container>
+                                        <label>Name</label>
+                                        <input class="input-disabled" title="Name" ng-model="p.name" ng-disabled="true">
+                                    </md-input-container>
+                                    <md-input-container class="md-block">
+                                        <label>Description</label>
+                                        <input class="input-disabled" title="Description" ng-model="p.description" ng-disabled="true">
+                                    </md-input-container>
+                                </div>
+                                <div class="col-md-2">
+                                    <md-input-container>
+                                        <label>Status</label>
+                                        <input class="input-disabled" title="Status" value="{{(p.active) ? 'Enabled' : 'Disabled'}}" ng-disabled="true">
+                                    </md-input-container>
+                                    <md-input-container>
+                                        <label>Date Created</label>
+                                        <input class="input-disabled" title="Date" value="{{p.createdAt | date}}" ng-disabled="true">
+                                    </md-input-container>
+                                </div>
+                                <div class="col-md-2 col-md-offset-2">
+                                    <md-input-container>
+                                        <label>Matching %</label>
+                                        <input class="input-disabled" title="Percentage" placeholder="00%" value="{{vm.matchedObjects[vm.indexOfProject(p._id)].matchingPercent | number : 0}}%" ng-disabled="true">
+                                    </md-input-container>
+                                    <md-input-container>
+                                        <label>Date Matched</label>
+                                        <input class="input-disabled" title="Date" value="{{vm.matchedObjects[vm.indexOfProject(p._id)].matchedAt | date}}" ng-disabled="true">
+                                    </md-input-container>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-9 col-md-offset-2">
+                                    <p>Tags:</p>
+                                    <md-content layout="row">
+                                        <md-chips ng-repeat="tag in p.tags">
+                                            <md-chip>
+                                                <strong>{{tag.name}}</strong>
+                                            </md-chip>
+                                        </md-chips>
+                                    </md-content>
+                                    <p>Matched Tags:</p>
+                                    <md-content layout="row">
+                                        <md-chips ng-repeat="tag in vm.matchedObjects[$index].matchedTags">
+                                            <md-chip>
+                                                <strong>{{tag.name}}</strong>
+                                            </md-chip>
+                                        </md-chips>
+                                    </md-content>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,164 @@
+<navigation></navigation>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 col-centered register-box">
+            <h2><span class="fa fa-graduation-cap"></span> Register Academic Partner</h2>
+            <div class="row">
+                <div class="col-md-4 col-md-offset-2">
+                    <button ng-click="vm.facebookBtn()" class="btn btn-primary button-width-200px center-block"><span class="fa fa-facebook"></span> Register with Facebook</button>
+                </div>
+                <div class="col-md-4">
+                    <button ng-click="vm.linkedInBtn()" class="btn btn-info button-width-200px center-block"><span class="fa fa-linkedin"></span> Register with LinkedIn</button>
+                </div>
+            </div>
+            <br />
+            <form name="regform" novalidate>
+                <!---------------------
+                    Registration step 1
+                 --------------------->
+                <div class="row" ng-show="vm.tab1">
+                    <md-content class="md-no-momentum" layout-padding>
+                        <md-input-container class="md-icon-float md-block">
+                            <label>First name</label>
+                            <md-icon md-svg-src="../icons/ic_person_black_24px.svg"></md-icon>
+                            <input name="firstname" ng-model="vm.credentials.firstname" type="text"
+                                   md-maxlength="50" required>
+                            <div ng-messages="regform.firstname.$error">
+                                <div ng-message="required">This is required!</div>
+                                <div ng-message="md-maxlength">That's too long!</div>
+                            </div>
+                        </md-input-container>
+                        <md-input-container class="md-icon-float md-block">
+                            <label>Last name</label>
+                            <md-icon md-svg-src="../icons/ic_group_black_24px.svg"></md-icon>
+                            <input name="lastname" ng-model="vm.credentials.lastname" type="text"
+                                   md-maxlength="50" required>
+                            <div ng-messages="regform.lastname.$error">
+                                <div ng-message="required">This is required!</div>
+                                <div ng-message="md-maxlength">That's too long!</div>
+                            </div>
+                        </md-input-container>
+                        <md-input-container class="md-block">
+                            <md-icon md-svg-src="../icons/ic_email_black_24px.svg"></md-icon>
+                            <input name="email" ng-model="vm.credentials.email" type="email"
+                                   placeholder="E-mail" ng-pattern="/^.+@.+\..+$/" required>
+                            <div ng-messages="regform.email.$error">
+                                <div ng-message="required">This is required!</div>
+                                <div ng-show="regform.email.$error.pattern">Not a valid e-mail!</div>
+                                <div ng-show="regform.email.$error.used">E-mail already in use!</div>
+                            </div>
+                        </md-input-container>
+                        <md-input-container class="md-icon-float md-block">
+                            <label>Password</label>
+                            <md-icon md-svg-src="../icons/ic_lock_black_24px.svg"></md-icon>
+                            <input name="password" type="password" ng-model="vm.credentials.password"
+                                   ng-pattern="/(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z])/" minlength="8" required>
+                            <div ng-messages="regform.password.$error">
+                                <div ng-message="required">
+                                    This is required!
+                                </div>
+                                <div ng-show="regform.password.$error.minlength && !regform.password.$error.required">
+                                    Must contain at least 8 characters.
+                                </div>
+                                <div ng-show="!regform.password.$error.required && regform.password.$error.pattern">
+                                    Must contain one lower &amp; one uppercase letter and one non-alpha character.
+                                </div>
+                            </div>
+                        </md-input-container>
+                        <md-input-container class="md-icon-float md-block">
+                            <label>Confirm password</label>
+                            <md-icon md-svg-src="../icons/ic_done_black_24px.svg" ng-show="vm.checkPw()"></md-icon>
+                            <input name="repeatPassword" type="password" ng-model="vm.credentials.repeatPassword"
+                                   ng-disabled="regform.password.$invalid" required>
+                            <div ng-messages="regform.repeatPassword.$error">
+                                <div ng-message="required">This is required!</div>
+                                <div ng-show="!vm.checkPw() && !regform.repeatPassword.$error.required">Passwords must match!</div>
+                            </div>
+                        </md-input-container>
+                    </md-content>
+                    <div class="text-center">
+                        <md-button class="md-raised md-primary" ng-disabled="regform.$invalid || !vm.checkPw()" ng-click="vm.tab1click()">Next</md-button>
+                    </div>
+                </div>
+                <!---------------------
+                    Registration step 2
+                ----------------------->
+                <div class="row" ng-show="vm.tab2">
+                    <md-content class="md-no-momentum" layout-padding>
+                        <md-input-container class="md-icon-float md-block">
+                            <label>Address</label>
+                            <md-icon md-svg-src="../icons/ic_home_black_24px.svg"></md-icon>
+                            <input name="address" ng-model="vm.credentials.address" type="text"
+                                   md-maxlength="50">
+                            <div ng-messages="regform.address.$error">
+                                <div ng-message="md-maxlength">That's too long!</div>
+                            </div>
+                        </md-input-container>
+                        <md-input-container class="md-icon-float md-block">
+                            <label>Postal Code</label>
+                            <md-icon md-svg-src="../icons/ic_place_black_24px.svg"></md-icon>
+                            <input name="postalCode" ng-model="vm.credentials.zipcode" placeholder="12345"
+                                   ng-pattern="/^[0-9]{3,10}$/">
+                            <div ng-messages="regform.postalCode.$error">
+                                <div ng-message="pattern"> <!-- trengs ikke pattern siden type er number, men w/e -->
+                                    Zip code must be all numbers. <br />And between 3 and 10 characters long.
+                                </div>
+                            </div>
+                        </md-input-container>
+                        <md-input-container class="md-icon-float md-block">
+                            <label>City</label>
+                            <md-icon md-svg-src="../icons/ic_location_city_black_24px.svg"></md-icon>
+                            <input name="city" ng-model="vm.credentials.city" type="text" md-maxlength="35">
+                            <div ng-messages="regform.city.$error">
+                                <div ng-message="md-maxlength">That's too long!</div>
+                            </div>
+                        </md-input-container>
+                        <md-input-container class="md-icon-float md-block">
+                            <label>Country</label>
+                            <md-icon md-svg-src="../icons/ic_terrain_black_24px.svg"></md-icon>
+                            <md-select ng-model="vm.credentials.country" placeholder="Select country">
+                                <md-option ng-repeat="c in countries" value="{{c.code}}">
+                                    {{c.name}}
+                                </md-option>
+                            </md-select>
+                        </md-input-container>
+                    </md-content>
+                    <div class="text-center">
+                        <md-button ng-if="vm.tab2" class="md-raised" ng-click="vm.regStart()">Back</md-button>
+                        <md-button class="md-raised md-warn" ng-click="vm.tab2click()">Skip</md-button>
+                        <md-button class="md-raised md-primary" ng-disabled="regform.$invalid" ng-click="vm.tab2click()">Next</md-button>
+                    </div>
+                </div>
+
+                <!---------------------
+                    Registration step 3
+                ----------------------->
+                <div class="row" ng-show="vm.tab3">
+                    <md-content class="md-no-momentum" layout-padding>
+                        <md-input-container class="md-icon-float md-block">
+                            <label>Employer</label>
+                            <md-icon md-svg-src="../icons/ic_free_breakfast_black_24px.svg"></md-icon>
+                            <input name="employer" ng-model="vm.credentials.job_place" type="text" md-maxlength="35">
+                            <div ng-messages="regform.employer.$error">
+                                <div ng-message="md-maxlength">That's too long!</div>
+                            </div>
+                        </md-input-container>
+                        <md-input-container class="md-icon-float md-block">
+                            <label>Title</label>
+                            <md-icon md-svg-src="../icons/ic_face_black_24px.svg"></md-icon>
+                            <input name="title" ng-model="vm.credentials.job_title" type="text" md-maxlength="35">
+                            <div ng-messages="regform.title.$error">
+                                <div ng-message="md-maxlength">That's too long!</div>
+                            </div>
+                        </md-input-container>
+                    </md-content>
+                    <div class="text-center">
+                        <md-button class="md-raised" ng-if="vm.tab3" ng-click="vm.tab1click()">Back</md-button>
+                        <md-button type="button" ng-click="vm.onSubmit()" class="md-raised md-primary" ng-disabled="regform.$invalid">Complete</md-button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

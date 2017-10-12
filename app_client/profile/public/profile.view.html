@@ -1,0 +1,27 @@
+<navigation></navigation>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="table-box box-browse-public" id="content">
+                <div class="table-box-header box-header-users">
+                    <h2><span class="break"></span>People and Organizations</h2>
+                </div>
+                <div class="table-box-content public-profile">
+                    <div class="row">
+                        <div class="col-md-8 col-md-offset-2 text-center">
+                            <h2 ng-show="vm.profileData.academic">{{ vm.profileData.name }}</h2>
+                            <h2 ng-show="vm.profileData.industrial && !vm.profileData.academic">{{ vm.profileData.companyname }}</h2>
+                            <img class="img-rounded profile-image" ng-src="{{ vm.profileData.imageURL }}" alt="Profile Image">
+                        </div>
+                    </div>
+                    <div class="row text-center">
+                        <h3 ng-show="vm.profileData.academic">Academic Partner</h3>
+                        <h3 ng-show="vm.profileData.industrial">Industrial Partner</h3>
+                        <h4>{{ vm.getCountry(vm.profileData.country) }}</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

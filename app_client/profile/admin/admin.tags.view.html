@@ -1,0 +1,60 @@
+<navigation></navigation>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="table-box box-admin-tags">
+                <div class="table-box-header">
+                    <h2><span class="break"></span>Manage Tags</h2>
+                </div>
+                <div class="table-box-content">
+                    <table st-table="listTags" st-safe-src="vm.tableTags" class="table table-striped">
+                        <colgroup>
+                            <col class="table-col-width-40">
+                            <col class="table-col-width-10">
+                            <col class="table-col-width-10">
+                            <col class="table-col-width-40">
+                        </colgroup>
+                        <thead>
+                            <tr class="table-sortable">
+                                <th st-sort="tag">Tag</th>
+                                <th st-sort="times">Times used</th>
+                                <th st-sort="approved" class="table-checkbox-center">Approved</th>
+                            </tr>
+                            <tr>
+                                <th colspan="5"><input st-search="" class="form-control" placeholder="global search ..." type="text"/></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="t in listTags">
+                                <td>{{ t.name }}</td>
+                                <td class="table-checkbox-center">{{ t.timesUsed }}</td>
+                                <td class="table-checkbox-center" ng-show="t.approved"><span class="fa fa-check-circle"></span></td>
+                                <td class="table-checkbox-center" ng-show="!t.approved"></td>
+                                <td>
+                                    <div class="text-right">
+                                        <button type="button" ng-click="vm.openDeleteModal(t)" class="btn btn-sm btn-danger" title="Delete Tag">
+                                            <i class="fa fa-remove">
+                                            </i>
+                                        </button>
+                                        <button type="button" ng-if="!t.approved" ng-click="vm.approveTag(t)" class="btn btn-sm btn-success" title="Approve Tag">
+                                            <i class="fa fa-check">
+                                            </i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr class="table-pagination">
+                                <td colspan="5" class="text-center">
+                                    <div st-pagination="" st-items-by-page="vm.itemsByPage" st-displayed-pages="5"></div>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,28 @@
+<div class="modal-header text-center">
+    <h4><span class="glyphicon glyphicon-log-in"></span> Log in</h4>
+</div>
+<div class="modal-body">
+    <form ng-submit="vm.onSubmit()">
+        <div class="form-group">
+            <label for="email">Email address</label>
+            <input type="email" class="form-control" id="email" placeholder="Enter email" ng-model="vm.credentials.email" autofocus required>
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" id="password" placeholder="Password" ng-model="vm.credentials.password" required>
+            <br />
+            <a href="" ng-click="vm.forgotPassword()">Forgot password?</a>
+        </div>
+        <br />
+        <button type="submit" class="btn btn-success button-fixed-width center-block">Log in</button>
+    </form>
+    <br />
+    <button ng-click="vm.facebookBtn()" class="btn btn-primary button-fixed-width center-block"><span class="fa fa-facebook"></span> Facebook</button>
+    <br />
+    <button ng-click="vm.linkedInBtn()" class="btn btn-info button-fixed-width center-block"><span class="fa fa-linkedin"></span> LinkedIn</button>
+    <br />
+    <!-- <button ng-click="vm.twitterBtn()" class="btn btn-warning button-fixed-width center-block">Twitter</button>
+    <br /> -->
+    <div class="text-danger text-center"> {{ error }} </div>
+    <br ng-show="!error" />
+</div>

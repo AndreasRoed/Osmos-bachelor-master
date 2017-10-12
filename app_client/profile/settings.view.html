@@ -1,0 +1,60 @@
+<navigation></navigation>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="table-box table-box-settings">
+                <div class="table-box-header">
+                    <h2><span class="break"></span>Settings</h2>
+                </div>
+                <div class="table-box-content">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="text-center">
+                                <h3>Warning!</h3>
+                                <p>Once you delete your account, it can <strong>not</strong> be reverted.</p>
+                                <p>For academic users: Research you might have uploaded will stay on the site.<br>
+                                    If you want it removed, please contact us on osmos.no.reply@gmail.com</p>
+                                <md-button class="md-raised md-warn" ng-click="vm.openDeleteAccountModal()">Delete Account</md-button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br /><br />
+            <div class="table-box table-box-settings">
+                <div class="table-box-header">
+                    <h2><span class="break"></span>Invite Researcher</h2>
+                </div>
+                <div class="table-box-content">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-md-8 col-centered">
+                                <h3 class="text-center">Invite a new user to Osmos and help us grow our network.</h3>
+                                <form ng-submit="vm.onSubmit()" name="inviteform" novalidate>
+                                    <md-content class="md-no-momentum" layout-padding>
+                                        <md-input-container class="md-block">
+                                            <label>E-mail</label>
+                                            <md-icon md-svg-src="../icons/ic_email_black_24px.svg"></md-icon>
+                                            <input name="email" ng-model="vm.invite.email" type="email"
+                                                   ng-pattern="/^.+@.+\..+$/" ng-required="true">
+                                            <div ng-messages="inviteform.email.$error">
+                                                <div ng-message="required">This is required!</div>
+                                                <div ng-show="inviteform.email.$error.pattern">Not a valid e-mail!</div>
+                                                <div ng-show="inviteform.email.$error.used">User is already registered!!</div>
+                                                <div ng-show="inviteform.email.$error.invited">User already invited less than 14 days ago!!</div>
+                                            </div>
+                                        </md-input-container>
+                                    </md-content>
+                                    <div class="text-center">
+                                        <md-button type="submit" class="md-raised md-primary" ng-disabled="inviteform.$invalid">Send invitation</md-button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,91 @@
+<navigation></navigation>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="table-box table-box-projects-me">
+                <div class="table-box-header">
+                    <h2><span class="break"></span>Create Project</h2>
+                </div>
+                <div class="table-box-content">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <form ng-submit="vm.checkTags()" name="projectNewForm">
+                                <md-content class="md-no-momentum" layout-padding>
+                                    <md-input-container class="md-icon-float md-block">
+                                        <label for="projectName">Project Name</label>
+                                        <md-icon md-svg-src="../icons/ic_person_black_24px.svg"></md-icon>
+                                        <input name="name" id="projectName" ng-model="vm.project.name" type="text"
+                                               md-maxlength="100" minlength="3" required>
+                                        <div ng-messages="projectNewForm.name.$error">
+                                            <div ng-message="required">This is required!</div>
+                                            <div ng-message="md-maxlength">That's too long!</div>
+                                        </div>
+                                    </md-input-container>
+                                    <md-input-container class="md-icon-float md-block">
+                                        <label for="projectDescription">Description</label>
+                                        <md-icon md-svg-src="../icons/ic_description_black_24px.svg"></md-icon>
+                                        <input name="description" id="projectDescription" ng-model="vm.project.description" type="text"
+                                               minlength="3" required>
+                                        <div ng-messages="projectNewForm.description.$error">
+                                            <div ng-message="required">This is required!</div>
+                                        </div>
+                                    </md-input-container>
+                                    <md-input-container class="md-icon-float md-block">
+                                        <label for="projectIndustry">Industry</label>
+                                        <md-icon md-svg-src="../icons/ic_work_black_24px.svg"></md-icon>
+                                        <md-select id="projectIndustry" ng-model="vm.project.industry" placeholder="Select industry" required>
+                                            <md-option ng-repeat="i in vm.industries" value="{{i._id}}">
+                                                {{i.industry}}
+                                            </md-option>
+                                        </md-select>
+                                    </md-input-container>
+                                    <md-input-container class="md-icon-float md-block">
+                                        <label for="projectFunction">Function</label>
+                                        <md-icon md-svg-src="../icons/ic_build_black_24px.svg"></md-icon>
+                                        <md-select id="projectFunction" ng-model="vm.project.function" placeholder="Select function" required>
+                                            <md-option ng-repeat="f in vm.functions" value="{{f._id}}">
+                                                {{f.function}}
+                                            </md-option>
+                                        </md-select>
+                                    </md-input-container>
+                                    <md-input-container class="md-icon-float md-block">
+                                        <label for="projectRegions">Region</label>
+                                        <md-icon md-svg-src="../icons/ic_terrain_black_24px.svg"></md-icon>
+                                        <md-select id="projectRegions" ng-model="vm.project.region" placeholder="Select region" required>
+                                            <md-option ng-repeat="r in vm.regions" value="{{r._id}}">
+                                                {{r.region}}
+                                            </md-option>
+                                        </md-select>
+                                    </md-input-container>
+                                    <br />
+                                    <md-input-container class="md-icon-float md-block">
+                                        <label for="projectTags">Tags</label>
+                                        <md-chips title="Select tag from list or make a new tag by typing tag name and press enter" id="projectTags" ng-model="vm.project.tags" md-autocomplete-snap md-transform-chip="vm.transformChip($chip)">
+                                            <md-autocomplete
+                                                    md-selected-item="vm.selectedItem"
+                                                    md-search-text="vm.searchText"
+                                                    md-items="item in vm.querySearch(vm.searchText)"
+                                                    md-item-text="item.name" placeholder="Add a tag">
+                                                <span md-highlight-text="vm.searchText">{{item.name}}</span>
+                                            </md-autocomplete>
+                                            <md-chip-template>
+                                                <span>
+                                                  <strong>{{$chip.name}}</strong>
+                                                </span>
+                                            </md-chip-template>
+                                        </md-chips>
+                                        <div class="tags-validation-messages">{{tagsError}}</div>
+                                    </md-input-container>
+                                    <div class="text-center">
+                                        <md-button type="submit" class="md-raised md-primary" ng-disabled="projectNewForm.$invalid || !projectNewForm.$dirty || !vm.checkProjectTags()">Create Project</md-button>
+                                    </div>
+                                </md-content>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

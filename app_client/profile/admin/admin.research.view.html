@@ -1,0 +1,87 @@
+<navigation></navigation>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="table-box table-box-research">
+                <div class="table-box-header">
+                    <h2><span class="break"></span>Manage Research</h2>
+                </div>
+                <div class="table-box-content">
+                    <table st-table="adminResearch" st-safe-src="vm.tableAdminResearch" class="table table-striped">
+                        <colgroup>
+                            <col class="table-col-width-5">
+                            <col class="table-col-width-20">
+                            <col class="table-col-width-20">
+                            <col class="table-col-width-10">
+                            <col class="table-col-width-20">
+                            <col class="table-col-width-10">
+                            <col class="table-col-width-5">
+                            <col class="table-col-width-10">
+                        </colgroup>
+                        <thead>
+                            <tr class="table-sortable">
+                                <th></th>
+                                <th st-sort="name">Name</th>
+                                <th st-sort="createdBy">Owner</th>
+                                <th st-sort="date">Date Created</th>
+                                <th st-sort="description">Description</th>
+                                <th st-sort="documents">Documents</th>
+                                <th st-sort="status">Status</th>
+                            </tr>
+                            <tr>
+                                <th colspan="10"><input st-search="" class="form-control" placeholder="global search ..." type="text"/></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="r in adminResearch">
+                                <td><img class="img-rounded" id="profile-image-thumb" ng-src="{{vm.thumbURL(r.imageURL)}}"></td>
+                                <td>{{ r.name }}</td>
+                                <td>{{ vm.getUserName(r.createdBy) }}</td>
+                                <td>{{ r.createdAt | date}}</td>
+                                <td>{{ r.description }}</td>
+                                <td class="table-documents">
+                                    <span uib-dropdown on-toggle="toggled(open)">
+                                        <a href id="simple-dropdown" uib-dropdown-toggle>
+                                            {{ (r.documentURLs.length == 0) ? null : ((r.documentURLs.length == 1) ? r.documentURLs.length + ' item' : r.documentURLs.length + ' items') }}
+                                        </a>
+                                        <ul uib-dropdown-menu aria-labelledby="simple-dropdown">
+                                            <li class="dropdown-submenu" ng-repeat="URL in r.documentURLs">
+                                                <a href="">{{ URL.name }}</a>
+                                                <ul class="dropdown-menu">
+                                                    <li><a href="{{ URL.URL }}" target="_blank">Open</a></li>
+                                                    <li><a href ng-click="vm.openDeleteDocumentModal(r, URL)">Delete</a></li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </span>
+                                </td>
+                                <td class="table-checkbox-center">{{(r.active) ? 'Enabled' : 'Disabled'}}</td>
+                                <td>
+                                    <div class="text-right">
+                                        <button type="button" ng-click="vm.disableEnableResearch(r)" ng-show="r.active" class="btn btn-sm btn-warning" title="Disable Research">
+                                            <i class="fa fa-ban"></i>
+                                        </button>
+                                        <button type="button" ng-click="vm.disableEnableResearch(r)" ng-show="!r.active" class="btn btn-sm btn-success" title="Enable Research">
+                                            <i class="fa fa-check"></i>
+                                        </button>
+                                        <button type="button" ng-click="vm.openDeleteModal(r)" class="btn btn-sm btn-danger" title="Delete Research">
+                                            <i class="fa fa-remove"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr class="table-pagination">
+                                <td colspan="10" class="text-center">
+                                    <div st-pagination="" st-items-by-page="vm.itemsByPage" st-displayed-pages="5"></div>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

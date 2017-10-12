@@ -1,0 +1,70 @@
+<navigation></navigation>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="table-box table-box-projects">
+                <div class="table-box-header">
+                    <h2><span class="break"></span>Manage Projects</h2>
+                </div>
+                <div class="table-box-content">
+                    <table st-table="adminProjects" st-safe-src="vm.tableAdminProject" class="table table-striped">
+                        <colgroup>
+                            <col class="table-col-width-5">
+                            <col class="table-col-width-20">
+                            <col class="table-col-width-20">
+                            <col class="table-col-width-10">
+                            <col class="table-col-width-30">
+                            <col class="table-col-width-5">
+                            <col class="table-col-width-10">
+                        </colgroup>
+                        <thead>
+                        <tr class="table-sortable">
+                            <th></th>
+                            <th st-sort="name">Name</th>
+                            <th st-sort="createdBy">Owner</th>
+                            <th st-sort="date">Date Created</th>
+                            <th st-sort="description">Description</th>
+                            <th st-sort="status">Status</th>
+                        </tr>
+                        <tr>
+                            <th colspan="8"><input st-search="" class="form-control" placeholder="global search ..." type="text"/></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="item in adminProjects">
+                            <td><img class="img-rounded" id="profile-image-thumb" ng-src="{{vm.thumbURL(item.imageURL)}}"></td>
+                            <td>{{ item.name }}</td>
+                            <td>{{ vm.getUserName(item.createdBy) }}</td>
+                            <td>{{ item.createdAt | date}}</td>
+                            <td>{{ item.description }}</td>
+                            <td class="table-checkbox-center">{{(item.active) ? 'Enabled' : 'Disabled'}}</td>
+
+                            <td>
+                                <div class="text-right">
+                                    <button type="button" ng-click="vm.disableEnableProject(item)" ng-show="item.active" class="btn btn-sm btn-warning" title="Disable Project">
+                                        <i class="fa fa-ban"></i>
+                                    </button>
+                                    <button type="button" ng-click="vm.disableEnableProject(item)" ng-show="!item.active" class="btn btn-sm btn-success" title="Enable Project">
+                                        <i class="fa fa-check"></i>
+                                    </button>
+                                    <button type="button" ng-click="vm.openDeleteModal(item)" class="btn btn-sm btn-danger" title="Delete Project">
+                                        <i class="fa fa-remove"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                        <tfoot>
+                        <tr class="table-pagination">
+                            <td colspan="7" class="text-center">
+                                <div st-pagination="" st-items-by-page="vm.itemsByPage" st-displayed-pages="5"></div>
+                            </td>
+                        </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
